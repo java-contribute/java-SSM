@@ -47,10 +47,10 @@
 			connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}" />
 
 		<!-- Java对象和数据对象的对照解析器 -->
-		<!--<javaTypeResolver-->
-			<!--type=" " >-->
-			<!--<property name="forceBigDecimals" value="true"/>-->
-		<!--</javaTypeResolver>-->
+		<javaTypeResolver
+				type="com.doctorwork.mybatis.generator.javatype.DoctorWorkJavaTypeResolver" >
+			<property name="forceBigDecimals" value="true"/>
+		</javaTypeResolver>
 
 		<!-- 生成模型的包名和位置 -->
 		<javaModelGenerator targetPackage="entity"
@@ -73,7 +73,7 @@
 			可选： domainObjectName：生成的domain类的名字，如果不设置，直接使用表名作为domain类的名字 modelType：参考context元素的defaultModelType，相当于覆盖 -->
 		<!-- 要生成的表,对象都以DO结尾，我们默认生成6个mapper操作 1. insert; 2. selectByPrimaryKey; 
 			3. selectAll; 4. updateByPrimaryKey; 5.insertSelective；6.updateByPrimaryKeySelective。你可以根据需要增加其他语句，但是不建议 -->
-		<table tableName="user" domainObjectName="UserDO"
+		<table tableName="user" domainObjectName="User"
 			enableInsert="true" enableSelectByPrimaryKey="true"
 			enableUpdateByPrimaryKey="true" enableSelectByExample="false"
 			enableUpdateByExample="false" enableDeleteByPrimaryKey="false"
@@ -91,7 +91,7 @@
 			<!-- columnOverride isGeneratedAlways="true" 在insert和update的语句中不出现对应的字段 
 				和ignoreColumn区别：ignoreColumn在生成的实体对象中都不会出现对应的字段 -->
 			<columnOverride column="is_delete" isGeneratedAlways="true"></columnOverride>
-			<columnOverride column="gmt_modified"
+			<columnOverride column="gmt_update"
 				isGeneratedAlways="true"></columnOverride>
 			<columnOverride column="gmt_create" isGeneratedAlways="true"></columnOverride>
 		</table>
