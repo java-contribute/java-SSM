@@ -34,14 +34,14 @@ public class UserLoginServiceImpl implements UserLoginService {
     @Override
     public String userRegister(User user) {
         String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
-        if(salt != null || salt != " ")
+        if(salt != null && salt != " ")
             return "用户名已经存在";
         //加密盐
         user.setUserSalt(DigestUtils.md5Hex(user.getUserName() + new Date().getTime()));
-        LOGGER.debug("userSalt:" + user.getUserSalt());
+        LOGGER.info("userSalt:{}", user.getUserSalt());
         //加密用户密码
         user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + user.getUserSalt()));
-        LOGGER.debug("userPassword:" + user.getUserPassword());
+        LOGGER.info("userPassword:{}", user.getUserPassword());
         if (userMapper.insert(user) >= 1)
             return "注册成功";
         return "注册失败";
@@ -55,10 +55,12 @@ public class UserLoginServiceImpl implements UserLoginService {
     @Override
     public boolean userLogin(User user) {
         String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
-        if(salt != null || salt != " ")
+        LOGGER.info("Salt:{}",salt);
+        if(salt == null || salt == " ")
             return false;
-        user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + user.getUserSalt()));
+        user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + salt));
         String login = extUserMapper.userLoginByUserNameAndUserPassword(user.getUserName(),user.getUserPassword());
+        LOGGER.info("login:{}",login);
         if(login != null && login != " ")
             return true;
         return false;

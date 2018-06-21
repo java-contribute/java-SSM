@@ -19,7 +19,7 @@ public class UserLoginServiceTest extends BaseServiceTest {
     @Test
     public void userRegisterTest(){
         User user = new User();
-        user.setUserName("lijie");
+        user.setUserName("lijieTest1");
         user.setUserPassword("123456");
         user.setUserEmail("lijie@lijie.com");
         user.setUserNumber(1840123456);

@@ -22,12 +22,12 @@
         -->
         id, user_name, user_email, user_password, user_salt, user_number
     </sql>
-    <select id="selectUserSaltByUserNameAndCheckUserName" resultMap="BaseResultMap">
+    <select id="selectUserSaltByUserNameAndCheckUserName" resultType="String">
       SELECT `user_salt`
       FROM `user`
       WHERE `user_name` = #{userName,jdbcType=VARCHAR}
     </select>
-    <select id="userLoginByUserNameAndUserPassword" resultMap="BaseResultMap">
+    <select id="userLoginByUserNameAndUserPassword" resultType="String">
       SELECT *
       FROM `user`
       WHERE `user_name`= #{userName,jdbcType=VARCHAR}

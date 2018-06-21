@@ -1,5 +1,6 @@
 package dao.manual;
 
+import entity.User;
 import org.apache.ibatis.annotations.Param;
 
 /**
