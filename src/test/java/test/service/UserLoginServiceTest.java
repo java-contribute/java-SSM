@@ -19,16 +19,16 @@ public class UserLoginServiceTest extends BaseServiceTest {
     @Test
     public void userRegisterTest(){
         User user = new User();
-        user.setUserName("liJie");
+        user.setUserName("xiYan");
         user.setUserPassword("123456");
-        user.setUserEmail("lijie@lijie.com");
+        user.setUserEmail("xiyan@xiyan.com");
         user.setUserNumber(1840123456);
         System.out.println(userLoginService.userRegister(user));
     }
     @Test
     public void userLoginTest(){
         User user = new User();
-        user.setUserName("liJie");
+        user.setUserName("xiYan");
         user.setUserPassword("123456");
         if (userLoginService.userLogin(user))
             System.out.println("登录成功");

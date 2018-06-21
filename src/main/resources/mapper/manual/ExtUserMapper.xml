@@ -25,12 +25,14 @@
     <select id="selectUserSaltByUserNameAndCheckUserName" resultType="String">
       SELECT `user_salt`
       FROM `user`
-      WHERE `user_name` = #{userName,jdbcType=VARCHAR}
+      WHERE `is_delete` = 0
+       AND `user_name` = #{userName,jdbcType=VARCHAR}
     </select>
     <select id="userLoginByUserNameAndUserPassword" resultType="String">
       SELECT *
       FROM `user`
-      WHERE `user_name`= #{userName,jdbcType=VARCHAR}
+      WHERE `is_delete` = 0
+      AND `user_name`= #{userName,jdbcType=VARCHAR}
       AND `user_password` = #{userPassword,jdbcType=VARCHAR}
     </select>
 </mapper>
