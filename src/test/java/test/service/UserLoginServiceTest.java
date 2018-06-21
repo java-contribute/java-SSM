@@ -19,7 +19,7 @@ public class UserLoginServiceTest extends BaseServiceTest {
     @Test
     public void userRegisterTest(){
         User user = new User();
-        user.setUserName("lijieTest1");
+        user.setUserName("liJie");
         user.setUserPassword("123456");
         user.setUserEmail("lijie@lijie.com");
         user.setUserNumber(1840123456);
@@ -28,7 +28,7 @@ public class UserLoginServiceTest extends BaseServiceTest {
     @Test
     public void userLoginTest(){
         User user = new User();
-        user.setUserName("lijie");
+        user.setUserName("liJie");
         user.setUserPassword("123456");
         if (userLoginService.userLogin(user))
             System.out.println("登录成功");
