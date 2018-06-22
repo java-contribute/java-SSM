@@ -31,5 +31,7 @@
     </bean>
 
     <!-- 4.扫描web相关的bean -->
+    <!--使用Annotation方式 完成映射  -->
     <context:component-scan base-package="web" />
+    <mvc:annotation-driven/>
 </beans>
