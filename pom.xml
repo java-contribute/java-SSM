@@ -7,6 +7,8 @@
     <groupId>java-contribute</groupId>
     <artifactId>java-SSM</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>Lijie</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
