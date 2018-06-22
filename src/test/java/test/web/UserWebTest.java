@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 public class UserWebTest extends BaseControllerTest {
 
     private MockMvc mockMvc;
-    private String userList = "/user/list";
+    private String userList = "/java-SSM/user/list";
     @Before
     public void setup() {
         this.mockMvc = webAppContextSetup(this.webApplicationContext).alwaysExpect(status().isOk()).alwaysDo(print()).build();
