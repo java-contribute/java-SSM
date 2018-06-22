@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import service.UserLoginService;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: Lijie
@@ -64,5 +65,10 @@ public class UserLoginServiceImpl implements UserLoginService {
         if(login != null && login != " ")
             return true;
         return false;
+    }
+
+    @Override
+    public List<User> userQueryAll() {
+        return userMapper.selectAll();
     }
 }

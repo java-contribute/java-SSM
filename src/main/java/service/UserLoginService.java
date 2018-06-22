@@ -2,6 +2,8 @@ package service;
 
 import entity.User;
 
+import java.util.List;
+
 /**
  * @Author: Lijie
  * @Date: 2018/6/19 16:44
@@ -20,4 +22,10 @@ public interface UserLoginService {
      * @return
      */
     boolean userLogin(User user);
+
+    /**
+     * 查看所有用户
+     * @return
+     */
+    List<User> userQueryAll();
 }
