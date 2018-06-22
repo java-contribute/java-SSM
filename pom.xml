@@ -117,12 +117,19 @@
             <artifactId>spring-tx</artifactId>
             <version>4.1.7.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- 3)Spring web -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>4.1.7.RELEASE</version>
         </dependency>
+        <!--SpringMVC-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>

@@ -1,9 +1,9 @@
 package test.service;
 
-import entity.User;
+import com.contribute.entity.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import service.UserLoginService;
+import com.contribute.service.UserLoginService;
 import test.BaseServiceTest;
 
 
