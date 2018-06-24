@@ -19,9 +19,9 @@ public class UserLoginServiceTest extends BaseServiceTest {
     @Test
     public void userRegisterTest(){
         User user = new User();
-        user.setUserName("xiYan");
+        user.setUserName("xiYanLi");
         user.setUserPassword("123456");
-        user.setUserEmail("xiyan@xiyan.com");
+        user.setUserEmail("xiyanli@xiyan.com");
         user.setUserNumber(1840123456);
         System.out.println(userLoginService.userRegister(user));
     }

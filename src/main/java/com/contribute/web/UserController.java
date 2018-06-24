@@ -25,12 +25,15 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    private Result UserList(){
-        System.out.println("接口测试1111");
-        Result result = new Result();
-        result.setData(userLoginService.userQueryAll());
-        System.out.println("接口测试2222");
-        LOGGER.info("result:{}",result);
-        return result;
+    private Result UserList() throws Exception {
+        try {
+            System.out.println("接口测试1111");
+            Result result = new Result(true,userLoginService.userQueryAll());
+            System.out.println("接口测试2222");
+            LOGGER.info("result:{}", result);
+            return result;
+        } catch (Exception ex) {
+            return new Result(false,ex);
+        }
     }
 }

@@ -32,7 +32,7 @@
     </bean>
         <!-- 4.扫描web相关的bean -->
     <!--使用Annotation方式 完成映射  -->
-    <context:component-scan base-package="web" >
+    <context:component-scan base-package="com.contribute.web" >
     <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     <!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射-->
     </context:component-scan>
