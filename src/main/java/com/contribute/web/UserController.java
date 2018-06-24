@@ -19,7 +19,7 @@ import com.contribute.service.UserLoginService;
 @RequestMapping("/user")
 public class UserController {
 
-    private Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserLoginService userLoginService;
 
