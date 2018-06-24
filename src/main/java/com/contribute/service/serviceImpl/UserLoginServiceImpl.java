@@ -1,7 +1,10 @@
 package com.contribute.service.serviceImpl;
 
+import com.contribute.common.enums.UserLoginEnum;
+import com.contribute.common.exceptions.UserLoginException;
 import com.contribute.dao.UserMapper;
 import com.contribute.dao.manual.ExtUserMapper;
+import com.contribute.dto.UserLoginExecution;
 import com.contribute.entity.User;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
@@ -33,19 +36,26 @@ public class UserLoginServiceImpl implements UserLoginService {
      * @return
      */
     @Override
-    public String userRegister(User user) {
-        String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
-        if(salt != null && salt != " ")
-            return "用户名已经存在";
-        //加密盐
-        user.setUserSalt(DigestUtils.md5Hex(user.getUserName() + new Date().getTime()));
-        LOGGER.info("userSalt:{}", user.getUserSalt());
-        //加密用户密码
-        user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + user.getUserSalt()));
-        LOGGER.info("userPassword:{}", user.getUserPassword());
-        if (userMapper.insert(user) >= 1)
-            return "注册成功";
-        return "注册失败";
+    public UserLoginExecution userRegister(User user){
+        try {
+            String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
+            if(salt != null && salt != " ")
+                return new UserLoginExecution(user.getUserName(),UserLoginEnum.REGISTER_ECHO);
+            //加密盐
+            user.setUserSalt(DigestUtils.md5Hex(user.getUserName() + new Date().getTime()));
+            LOGGER.info("userSalt:{}", user.getUserSalt());
+            //加密用户密码
+            user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + user.getUserSalt()));
+            LOGGER.info("userPassword:{}", user.getUserPassword());
+            if (userMapper.insert(user) >= 1)
+                return new UserLoginExecution(user.getUserName(),UserLoginEnum.LOGIN_SUCCESS,user);
+            return new UserLoginExecution(user.getUserName(),UserLoginEnum.SYSTEM_ERROR);
+        }catch (UserLoginException uex){
+            throw uex;
+        }catch (Exception ex){
+            LOGGER.error(ex.getMessage(),ex);
+            throw ex;
+        }
     }
 
     /**
@@ -55,16 +65,22 @@ public class UserLoginServiceImpl implements UserLoginService {
      */
     @Override
     public boolean userLogin(User user) {
-        String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
-        LOGGER.info("Salt:{}",salt);
-        if(salt == null || salt == " ")
+        try{
+            String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
+            LOGGER.info("Salt:{}",salt);
+            if(salt == null || salt == " ")
+                return false;
+            user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + salt));
+            String login = extUserMapper.userLoginByUserNameAndUserPassword(user.getUserName(),user.getUserPassword());
+            LOGGER.info("login:{}",login);
+            if(login != null && login != " ")
+                return true;
             return false;
-        user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + salt));
-        String login = extUserMapper.userLoginByUserNameAndUserPassword(user.getUserName(),user.getUserPassword());
-        LOGGER.info("login:{}",login);
-        if(login != null && login != " ")
-            return true;
-        return false;
+        }catch (Exception ex)
+        {
+            LOGGER.error(ex.getMessage(),ex);
+            throw new UserLoginException("登录失败:"+ex.getMessage());
+        }
     }
 
     @Override

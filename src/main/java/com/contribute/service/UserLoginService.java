@@ -1,5 +1,6 @@
 package com.contribute.service;
 
+import com.contribute.dto.UserLoginExecution;
 import com.contribute.entity.User;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface UserLoginService {
      * @param user
      * @return
      */
-    String userRegister(User user);
+    UserLoginExecution userRegister(User user);
 
     /**
      * 用户登录
