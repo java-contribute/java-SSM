@@ -18,7 +18,6 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
  * @Author: Lijie
  * @Date: 2018/6/22 11:14
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 // 配置事务的回滚,对数据库的增删改都会回滚,便于测试用例的循环利用
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional

@@ -2,6 +2,7 @@ package com.contribute.web;
 
 
 import com.contribute.dto.Result;
+import com.contribute.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,36 @@ public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserLoginService userLoginService;
-
+    //用户列表
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private Result UserList() throws Exception {
         try {
-            System.out.println("接口测试1111");
             Result result = new Result(true,userLoginService.userQueryAll());
-            System.out.println("接口测试2222");
+            LOGGER.info("result:{}", result);
+            return result;
+        } catch (Exception ex) {
+            return new Result(false,ex);
+        }
+    }
+    //用户注册
+    @ResponseBody
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    private Result UserRegister(User user) throws Exception {
+        try {
+            Result result = new Result(true,userLoginService.userRegister(user));
+            LOGGER.info("result:{}", result);
+            return result;
+        } catch (Exception ex) {
+            return new Result(false,ex);
+        }
+    }
+    //用户登录
+    @ResponseBody
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    private Result UserLogin(User user) throws Exception {
+        try {
+            Result result = new Result(true,userLoginService.userLogin(user));
             LOGGER.info("result:{}", result);
             return result;
         } catch (Exception ex) {
