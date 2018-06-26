@@ -7,11 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.contribute.service.UserLoginService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Author: Lijie
@@ -39,7 +39,8 @@ public class UserController {
     //用户注册
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    private Result UserRegister(@RequestParam("user") User user) throws Exception {
+    private Result UserRegister(@ModelAttribute User user, HttpServletRequest request,
+                                HttpServletResponse responseUser) throws Exception {
         try {
             Result result = new Result(true,userLoginService.userRegister(user));
             LOGGER.info("result:{}", result);
