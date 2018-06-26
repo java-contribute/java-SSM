@@ -41,6 +41,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     private Result UserRegister(@RequestBody User user) throws Exception {
         try {
+            user.toString();
             Result result = new Result(true,userLoginService.userRegister(user));
             LOGGER.info("result:{}", result);
             return result;
