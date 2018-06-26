@@ -38,9 +38,10 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
     private Result UserRegister(@RequestBody User user) throws Exception {
         try {
-            user.toString();
+            System.out.println(user);
+            LOGGER.debug("username:{}",user.getUserName());
             Result result = new Result(true,userLoginService.userRegister(user));
-            LOGGER.info("result:{}", result);
+            LOGGER.debug("result:{}", result);
             return result;
         } catch (Exception ex) {
             return new Result(false,ex);

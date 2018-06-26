@@ -25,6 +25,7 @@ public class UserWebTest extends BaseControllerTest {
 
     private MockMvc mockMvc;
     private String userList = "/user/list";
+    private String userRegister = "/user/register";
     @Before
     public void setup() {
         this.mockMvc = webAppContextSetup(this.webApplicationContext).alwaysExpect(status().isOk()).alwaysDo(print()).build();
@@ -34,6 +35,15 @@ public class UserWebTest extends BaseControllerTest {
     public void userList(){
         try {
             this.mockMvc.perform(get(userList));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void userRegister(){
+        try {
+            this.mockMvc.perform(get(userRegister));
         } catch (Exception e) {
             e.printStackTrace();
         }
