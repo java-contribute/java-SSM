@@ -10,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.contribute.service.UserLoginService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * @Author: Lijie
  * @Date: 2018/6/22 10:49
@@ -38,7 +35,7 @@ public class UserController {
     }
     //用户注册
     @ResponseBody
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
     private Result UserRegister(@RequestBody User user) throws Exception {
         try {
             user.toString();
