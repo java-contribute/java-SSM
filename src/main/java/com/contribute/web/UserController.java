@@ -36,9 +36,11 @@ public class UserController {
     //用户注册
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
-    private Result UserRegister(@RequestBody String username) throws Exception {
+    private Result UserRegister(String username, String userpassword) throws Exception {
         System.out.println(username);
+        System.out.println(userpassword);
         LOGGER.debug("username:{}",username);
+        LOGGER.debug("username:{}",userpassword);
         return null;
 //        try {
 //            System.out.println(user);
