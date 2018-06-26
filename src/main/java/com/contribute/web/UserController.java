@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.contribute.service.UserLoginService;
 
@@ -38,7 +39,7 @@ public class UserController {
     //用户注册
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    private Result UserRegister(User user) throws Exception {
+    private Result UserRegister(@RequestParam("user") User user) throws Exception {
         try {
             Result result = new Result(true,userLoginService.userRegister(user));
             LOGGER.info("result:{}", result);
