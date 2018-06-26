@@ -36,16 +36,19 @@ public class UserController {
     //用户注册
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
-    private Result UserRegister(@RequestBody User user) throws Exception {
-        try {
-            System.out.println(user);
-            LOGGER.debug("username:{}",user.getUserName());
-            Result result = new Result(true,userLoginService.userRegister(user));
-            LOGGER.debug("result:{}", result);
-            return result;
-        } catch (Exception ex) {
-            return new Result(false,ex);
-        }
+    private Result UserRegister(@RequestBody String username) throws Exception {
+        System.out.println(username);
+        LOGGER.debug("username:{}",username);
+        return null;
+//        try {
+//            System.out.println(user);
+//            LOGGER.debug("username:{}",user.getUserName());
+//            Result result = new Result(true,userLoginService.userRegister(user));
+//            LOGGER.debug("result:{}", result);
+//            return result;
+//        } catch (Exception ex) {
+//            return new Result(false,ex);
+//        }
     }
     //用户登录
     @ResponseBody
