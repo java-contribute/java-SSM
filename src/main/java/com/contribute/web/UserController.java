@@ -39,8 +39,7 @@ public class UserController {
     //用户注册
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    private Result UserRegister(@ModelAttribute User user, HttpServletRequest request,
-                                HttpServletResponse responseUser) throws Exception {
+    private Result UserRegister(@RequestBody User user) throws Exception {
         try {
             Result result = new Result(true,userLoginService.userRegister(user));
             LOGGER.info("result:{}", result);
