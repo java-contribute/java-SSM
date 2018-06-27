@@ -1,6 +1,6 @@
 package com.contribute.web;
 
-
+import com.alibaba.fastjson.*;
 import com.contribute.dto.Result;
 import com.contribute.entity.User;
 import org.slf4j.Logger;
@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.contribute.service.UserLoginService;
+
+import javax.json.Json;
 
 /**
  * @Author: Lijie
@@ -35,8 +37,10 @@ public class UserController {
     }
     //用户注册
     @ResponseBody
-    @RequestMapping(value = "/register", method = RequestMethod.GET, consumes = "application/json")
-    private Result UserRegister(@RequestBody User user) throws Exception {
+    @RequestMapping(value = "/register", method = RequestMethod.POST,produces = {
+            "application/json; charset=utf-8" })
+    private Result UserRegister(@RequestBody String userString){
+        User user = JSON.parseObject(userString, User.class);
         System.out.println(user);
         LOGGER.debug("username:{}",user);
         return null;

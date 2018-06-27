@@ -37,4 +37,6 @@
     <!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射-->
     </context:component-scan>
     <mvc:annotation-driven/>
+    <context:annotation-config />
+
 </beans>
