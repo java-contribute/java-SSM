@@ -6,7 +6,7 @@ package com.contribute.common.enums;
  */
 public enum UserLoginEnum {
 
-    LOGIN_SUCCESS(101, "登录成功"), LOGIN_FAILED(102, "账号或密码错误"),REGISTER_SUCCES(103,"注册成功"),
+    LOGIN_SUCCESS(101, "登录成功"), LOGIN_FAILED(102, "账号或密码错误"),REGISTER_SUCCESS(103,"注册成功"),
     REGISTER_FAILED(104,"注册失败"), REGISTER_ECHO(105,"账号已经存在"), SYSTEM_ERROR(106,"系统错误");
     //错误码
     private int state;
