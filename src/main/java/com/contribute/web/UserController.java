@@ -43,16 +43,15 @@ public class UserController {
         User user = JSON.parseObject(userString, User.class);
         System.out.println(user);
         LOGGER.debug("username:{}",user);
-        return null;
-//        try {
-//            System.out.println(user);
-//            LOGGER.debug("username:{}",user.getUserName());
-//            Result result = new Result(true,userLoginService.userRegister(user));
-//            LOGGER.debug("result:{}", result);
-//            return result;
-//        } catch (Exception ex) {
-//            return new Result(false,ex);
-//        }
+        try {
+            System.out.println(user);
+            LOGGER.debug("username:{}",user.getUserName());
+            Result result = new Result(true,userLoginService.userRegister(user));
+            LOGGER.debug("result:{}", result);
+            return result;
+        } catch (Exception ex) {
+            return new Result(false,ex);
+        }
     }
     //用户登录
     @ResponseBody
