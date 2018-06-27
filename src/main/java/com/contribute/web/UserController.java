@@ -37,7 +37,7 @@ public class UserController {
     }
     //用户注册
     @ResponseBody
-    @RequestMapping(value = "/register", method = RequestMethod.POST,produces = {
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = {
             "application/json; charset=utf-8" })
     private Result UserRegister(@RequestBody String userString){
         User user = JSON.parseObject(userString, User.class);

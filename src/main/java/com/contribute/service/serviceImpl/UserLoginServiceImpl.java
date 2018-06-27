@@ -48,7 +48,7 @@ public class UserLoginServiceImpl implements UserLoginService {
             user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + user.getUserSalt()));
             LOGGER.info("userPassword:{}", user.getUserPassword());
             if (userMapper.insert(user) >= 1)
-                return new UserLoginExecution(user.getUserName(),UserLoginEnum.LOGIN_SUCCESS,user);
+                return new UserLoginExecution(user.getUserName(),UserLoginEnum.REGISTER_SUCCES,user);
             return new UserLoginExecution(user.getUserName(),UserLoginEnum.SYSTEM_ERROR);
         }catch (UserLoginException uex){
             throw uex;
