@@ -54,7 +54,7 @@ public class UserController {
     }
     //用户登录
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     private Result UserLogin(@RequestBody User user) throws Exception {
         try {
             Result result = new Result(true,userLoginService.userLogin(user));
