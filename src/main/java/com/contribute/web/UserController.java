@@ -38,8 +38,8 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = {
             "application/json; charset=utf-8" })
-    private Result UserRegister(@RequestBody String userString){
-        User user = JSON.parseObject(userString, User.class);
+    private Result UserRegister(@RequestBody User user){
+//        User user = JSON.parseObject(userString, User.class);
         System.out.println(user);
         LOGGER.debug("username:{}",user);
         try {
