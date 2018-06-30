@@ -22,7 +22,7 @@ public class UserLoginServiceTest extends BaseServiceTest {
         user.setUserName("xiYanLi");
         user.setUserPassword("123456");
         user.setUserEmail("xiyanli@xiyan.com");
-        user.setUserNumber(1840123456);
+        user.setUserNumber("18401234213");
         System.out.println(userLoginService.userRegister(user));
     }
     @Test

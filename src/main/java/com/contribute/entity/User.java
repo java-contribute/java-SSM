@@ -63,7 +63,7 @@ public class User implements Serializable {
      * This field corresponds to the database column <tt>user.user_number<tt>
      * </pre>
      */
-    private Long userNumber;
+    private String userNumber;
 
     /**
      * <pre>
@@ -209,7 +209,7 @@ public class User implements Serializable {
      *
      * @return 用户电话号码
      */
-    public Long getUserNumber() {
+    public String getUserNumber() {
         return userNumber;
     }
 
@@ -220,7 +220,7 @@ public class User implements Serializable {
      *
      * @param userNumber 用户电话号码
      */
-    public void setUserNumber(Long userNumber) {
+    public void setUserNumber(String userNumber) {
         this.userNumber = userNumber;
     }
 
