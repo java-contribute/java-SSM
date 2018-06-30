@@ -30,8 +30,6 @@ public class UserLoginServiceTest extends BaseServiceTest {
         User user = new User();
         user.setUserName("xiYan");
         user.setUserPassword("123456");
-        if (userLoginService.userLogin(user))
-            System.out.println("登录成功");
-        else System.out.println("登录失败");
+        System.out.println(userLoginService.userLogin(user));
     }
 }

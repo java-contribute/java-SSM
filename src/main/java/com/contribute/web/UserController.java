@@ -41,7 +41,8 @@ public class UserController {
     }
     //用户登录
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = {
+            "application/json; charset=utf-8" })
     private Result UserLogin(@RequestBody User user) throws Exception {
         try {
             Result result = new Result(true, userLoginService.userLogin(user));

@@ -67,16 +67,18 @@ public class UserLoginServiceImpl implements UserLoginService {
     public UserLoginExecution userLogin(User user) {
         try{
             String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
-            LOGGER.info("Salt:{}",salt);
+            LOGGER.info("Salt:{}", salt);
             if(salt == null || salt == " ")
                 return new UserLoginExecution(user.getUserName(), UserLoginEnum.LOGIN_FAILED);
             user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + salt));
             String login = extUserMapper.userLoginByUserNameAndUserPassword(user.getUserName(), user.getUserPassword());
-            LOGGER.info("login:{}",login);
+            LOGGER.info("login:{}", login);
             if(login != null && login != " ")
                 return new UserLoginExecution(user.getUserName(), UserLoginEnum.LOGIN_SUCCESS, user);
             return new UserLoginExecution(user.getUserName(), UserLoginEnum.LOGIN_FAILED);
-        }catch (Exception ex)
+        }catch (UserLoginException uex){
+            throw uex;
+        } catch (Exception ex)
         {
             LOGGER.error(ex.getMessage(), ex);
             throw new UserLoginException("登录失败:"+ex.getMessage());
