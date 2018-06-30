@@ -22,7 +22,7 @@ public interface UserLoginService {
      * @param user
      * @return
      */
-    boolean userLogin(User user);
+    UserLoginExecution userLogin(User user);
 
     /**
      * 查看所有用户

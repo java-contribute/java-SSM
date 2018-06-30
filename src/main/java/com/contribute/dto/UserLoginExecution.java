@@ -29,7 +29,7 @@ public class UserLoginExecution {
         this.stateMessage = userLoginEnum.getStateMessage();
     }
     //登录注册成功构造器
-    public UserLoginExecution(String userName, UserLoginEnum userLoginEnum,User user){
+    public UserLoginExecution(String userName, UserLoginEnum userLoginEnum, User user){
         this.userName = userName;
         this.state = userLoginEnum.getState();
         this.stateMessage = userLoginEnum.getStateMessage();

@@ -40,7 +40,7 @@ public class UserLoginServiceImpl implements UserLoginService {
         try {
             String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
             if(salt != null && salt != " ")
-                return new UserLoginExecution(user.getUserName(),UserLoginEnum.REGISTER_ECHO);
+                return new UserLoginExecution(user.getUserName(), UserLoginEnum.REGISTER_ECHO);
             //加密盐
             user.setUserSalt(DigestUtils.md5Hex(user.getUserName() + new Date().getTime()));
             LOGGER.info("userSalt:{}", user.getUserSalt());
@@ -48,12 +48,12 @@ public class UserLoginServiceImpl implements UserLoginService {
             user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + user.getUserSalt()));
             LOGGER.info("userPassword:{}", user.getUserPassword());
             if (userMapper.insert(user) >= 1)
-                return new UserLoginExecution(user.getUserName(),UserLoginEnum.REGISTER_SUCCESS,user);
-            return new UserLoginExecution(user.getUserName(),UserLoginEnum.SYSTEM_ERROR);
+                return new UserLoginExecution(user.getUserName(), UserLoginEnum.REGISTER_SUCCESS, user);
+            return new UserLoginExecution(user.getUserName(), UserLoginEnum.SYSTEM_ERROR);
         }catch (UserLoginException uex){
             throw uex;
         }catch (Exception ex){
-            LOGGER.error(ex.getMessage(),ex);
+            LOGGER.error(ex.getMessage(), ex);
             throw ex;
         }
     }
@@ -64,21 +64,21 @@ public class UserLoginServiceImpl implements UserLoginService {
      * @return
      */
     @Override
-    public boolean userLogin(User user) {
+    public UserLoginExecution userLogin(User user) {
         try{
             String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
             LOGGER.info("Salt:{}",salt);
             if(salt == null || salt == " ")
-                return false;
+                return new UserLoginExecution(user.getUserName(), UserLoginEnum.LOGIN_FAILED);
             user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + salt));
-            String login = extUserMapper.userLoginByUserNameAndUserPassword(user.getUserName(),user.getUserPassword());
+            String login = extUserMapper.userLoginByUserNameAndUserPassword(user.getUserName(), user.getUserPassword());
             LOGGER.info("login:{}",login);
             if(login != null && login != " ")
-                return true;
-            return false;
+                return new UserLoginExecution(user.getUserName(), UserLoginEnum.LOGIN_SUCCESS, user);
+            return new UserLoginExecution(user.getUserName(), UserLoginEnum.LOGIN_FAILED);
         }catch (Exception ex)
         {
-            LOGGER.error(ex.getMessage(),ex);
+            LOGGER.error(ex.getMessage(), ex);
             throw new UserLoginException("登录失败:"+ex.getMessage());
         }
     }

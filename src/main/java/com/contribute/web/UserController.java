@@ -44,7 +44,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     private Result UserLogin(@RequestBody User user) throws Exception {
         try {
-            Result result = new Result(true,userLoginService.userLogin(user));
+            Result result = new Result(true, userLoginService.userLogin(user));
             LOGGER.info("result:{}", result);
             return result;
         } catch (Exception ex) {
@@ -56,7 +56,7 @@ public class UserController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private Result UserList() throws Exception {
         try {
-            Result result = new Result(true,userLoginService.userQueryAll());
+            Result result = new Result(true, userLoginService.userQueryAll());
             LOGGER.info("result:{}", result);
             return result;
         } catch (Exception ex) {
