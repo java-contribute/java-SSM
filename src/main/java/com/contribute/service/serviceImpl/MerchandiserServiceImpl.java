@@ -8,4 +8,5 @@ import com.contribute.service.MerchandiserService;
  * 商品服务层实现
  */
 public class MerchandiserServiceImpl implements MerchandiserService {
+
 }
