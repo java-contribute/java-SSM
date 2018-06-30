@@ -41,7 +41,7 @@ public class UserController {
     private Result UserRegister(@RequestBody User user){
 //        User user = JSON.parseObject(userString, User.class);
         System.out.println(user);
-        LOGGER.debug("username:{}",user);
+        LOGGER.debug("username:{}",user.getUserName());
         try {
             System.out.println(user);
             LOGGER.debug("username:{}",user.getUserName());
@@ -55,7 +55,7 @@ public class UserController {
     //用户登录
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    private Result UserLogin(User user) throws Exception {
+    private Result UserLogin(@RequestBody User user) throws Exception {
         try {
             Result result = new Result(true,userLoginService.userLogin(user));
             LOGGER.info("result:{}", result);
