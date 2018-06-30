@@ -1,6 +1,6 @@
 package com.contribute.service.serviceImpl;
 
-import com.contribute.common.enums.UserLoginEnum;
+import com.contribute.common.enums.LoginRegisterEnum;
 import com.contribute.common.exceptions.UserLoginException;
 import com.contribute.dao.UserMapper;
 import com.contribute.dao.manual.ExtUserMapper;
@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.contribute.service.UserLoginService;
+import com.contribute.service.UserLoginRegisterService;
 
 import java.util.Date;
 import java.util.List;
@@ -19,11 +19,12 @@ import java.util.List;
 /**
  * @Author: Lijie
  * @Date: 2018/6/19 16:44
+ * 用户登录、注册服务层实现
  */
 @Service
-public class UserLoginServiceImpl implements UserLoginService {
+public class UserLoginRegisterServiceImpl implements UserLoginRegisterService {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(UserLoginServiceImpl.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(UserLoginRegisterServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -40,7 +41,7 @@ public class UserLoginServiceImpl implements UserLoginService {
         try {
             String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
             if(salt != null && salt != " ")
-                return new UserLoginExecution(user.getUserName(), UserLoginEnum.REGISTER_ECHO);
+                return new UserLoginExecution(user.getUserName(), LoginRegisterEnum.REGISTER_ECHO);
             //加密盐
             user.setUserSalt(DigestUtils.md5Hex(user.getUserName() + new Date().getTime()));
             LOGGER.info("userSalt:{}", user.getUserSalt());
@@ -48,8 +49,8 @@ public class UserLoginServiceImpl implements UserLoginService {
             user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + user.getUserSalt()));
             LOGGER.info("userPassword:{}", user.getUserPassword());
             if (userMapper.insert(user) >= 1)
-                return new UserLoginExecution(user.getUserName(), UserLoginEnum.REGISTER_SUCCESS, user);
-            return new UserLoginExecution(user.getUserName(), UserLoginEnum.SYSTEM_ERROR);
+                return new UserLoginExecution(user.getUserName(), LoginRegisterEnum.REGISTER_SUCCESS, user);
+            return new UserLoginExecution(user.getUserName(), LoginRegisterEnum.SYSTEM_ERROR);
         }catch (UserLoginException uex){
             throw uex;
         }catch (Exception ex){
@@ -69,13 +70,13 @@ public class UserLoginServiceImpl implements UserLoginService {
             String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
             LOGGER.info("Salt:{}", salt);
             if(salt == null || salt == " ")
-                return new UserLoginExecution(user.getUserName(), UserLoginEnum.LOGIN_FAILED);
+                return new UserLoginExecution(user.getUserName(), LoginRegisterEnum.LOGIN_FAILED);
             user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + salt));
             String login = extUserMapper.userLoginByUserNameAndUserPassword(user.getUserName(), user.getUserPassword());
             LOGGER.info("login:{}", login);
             if(login != null && login != " ")
-                return new UserLoginExecution(user.getUserName(), UserLoginEnum.LOGIN_SUCCESS, user);
-            return new UserLoginExecution(user.getUserName(), UserLoginEnum.LOGIN_FAILED);
+                return new UserLoginExecution(user.getUserName(), LoginRegisterEnum.LOGIN_SUCCESS, user);
+            return new UserLoginExecution(user.getUserName(), LoginRegisterEnum.LOGIN_FAILED);
         }catch (UserLoginException uex){
             throw uex;
         } catch (Exception ex)

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.contribute.service.UserLoginService;
+import com.contribute.service.UserLoginRegisterService;
 
 
 /**
@@ -20,7 +20,7 @@ public class UserController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     @Autowired
-    private UserLoginService userLoginService;
+    private UserLoginRegisterService userLoginRegisterService;
     //用户注册
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = {
@@ -32,7 +32,7 @@ public class UserController {
         try {
             System.out.println(user);
             LOGGER.debug("username:{}",user.getUserName());
-            Result result = new Result(true,userLoginService.userRegister(user));
+            Result result = new Result(true, userLoginRegisterService.userRegister(user));
             LOGGER.debug("result:{}", result);
             return result;
         } catch (Exception ex) {
@@ -45,7 +45,7 @@ public class UserController {
             "application/json; charset=utf-8" })
     private Result UserLogin(@RequestBody User user) throws Exception {
         try {
-            Result result = new Result(true, userLoginService.userLogin(user));
+            Result result = new Result(true, userLoginRegisterService.userLogin(user));
             LOGGER.info("result:{}", result);
             return result;
         } catch (Exception ex) {
@@ -57,7 +57,7 @@ public class UserController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private Result UserList() throws Exception {
         try {
-            Result result = new Result(true, userLoginService.userQueryAll());
+            Result result = new Result(true, userLoginRegisterService.userQueryAll());
             LOGGER.info("result:{}", result);
             return result;
         } catch (Exception ex) {

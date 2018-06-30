@@ -8,8 +8,9 @@ import java.util.List;
 /**
  * @Author: Lijie
  * @Date: 2018/6/19 16:44
+ * 用户登录、注册服务层
  */
-public interface UserLoginService {
+public interface UserLoginRegisterService {
     /**
      * 用户注册
      * @param user

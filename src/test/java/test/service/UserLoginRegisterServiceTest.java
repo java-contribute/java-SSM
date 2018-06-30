@@ -3,7 +3,7 @@ package test.service;
 import com.contribute.entity.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.contribute.service.UserLoginService;
+import com.contribute.service.UserLoginRegisterService;
 import test.BaseServiceTest;
 
 
@@ -11,10 +11,10 @@ import test.BaseServiceTest;
  * @Author: Lijie
  * @Date: 2018/6/20 13:22
  */
-public class UserLoginServiceTest extends BaseServiceTest {
+public class UserLoginRegisterServiceTest extends BaseServiceTest {
 
     @Autowired
-    private UserLoginService userLoginService;
+    private UserLoginRegisterService userLoginRegisterService;
 
     @Test
     public void userRegisterTest(){
@@ -23,13 +23,13 @@ public class UserLoginServiceTest extends BaseServiceTest {
         user.setUserPassword("123456");
         user.setUserEmail("xiyanli@xiyan.com");
         user.setUserNumber("18401234213");
-        System.out.println(userLoginService.userRegister(user));
+        System.out.println(userLoginRegisterService.userRegister(user));
     }
     @Test
     public void userLoginTest(){
         User user = new User();
         user.setUserName("xiYan");
         user.setUserPassword("123456");
-        System.out.println(userLoginService.userLogin(user));
+        System.out.println(userLoginRegisterService.userLogin(user));
     }
 }

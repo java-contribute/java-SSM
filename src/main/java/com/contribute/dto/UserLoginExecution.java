@@ -1,10 +1,11 @@
 package com.contribute.dto;
 
-import com.contribute.common.enums.UserLoginEnum;
+import com.contribute.common.enums.LoginRegisterEnum;
 import com.contribute.entity.User;
 
 
 /**
+ *
  * @Author: Lijie
  * @Date: 2018/6/24 21:24
  */
@@ -23,16 +24,16 @@ public class UserLoginExecution {
 
     }
     //登录注册失败构造器
-    public UserLoginExecution(String userName, UserLoginEnum userLoginEnum){
+    public UserLoginExecution(String userName, LoginRegisterEnum loginRegisterEnum){
         this.userName = userName;
-        this.state = userLoginEnum.getState();
-        this.stateMessage = userLoginEnum.getStateMessage();
+        this.state = loginRegisterEnum.getState();
+        this.stateMessage = loginRegisterEnum.getStateMessage();
     }
     //登录注册成功构造器
-    public UserLoginExecution(String userName, UserLoginEnum userLoginEnum, User user){
+    public UserLoginExecution(String userName, LoginRegisterEnum loginRegisterEnum, User user){
         this.userName = userName;
-        this.state = userLoginEnum.getState();
-        this.stateMessage = userLoginEnum.getStateMessage();
+        this.state = loginRegisterEnum.getState();
+        this.stateMessage = loginRegisterEnum.getStateMessage();
         this.user = user;
     }
 
