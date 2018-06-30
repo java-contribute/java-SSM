@@ -1,6 +1,5 @@
 package com.contribute.web;
 
-import com.alibaba.fastjson.*;
 import com.contribute.dto.Result;
 import com.contribute.entity.User;
 import org.slf4j.Logger;
@@ -22,18 +21,6 @@ public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserLoginService userLoginService;
-    //用户列表
-    @ResponseBody
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    private Result UserList() throws Exception {
-        try {
-            Result result = new Result(true,userLoginService.userQueryAll());
-            LOGGER.info("result:{}", result);
-            return result;
-        } catch (Exception ex) {
-            return new Result(false,ex);
-        }
-    }
     //用户注册
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = {
@@ -58,6 +45,18 @@ public class UserController {
     private Result UserLogin(@RequestBody User user) throws Exception {
         try {
             Result result = new Result(true,userLoginService.userLogin(user));
+            LOGGER.info("result:{}", result);
+            return result;
+        } catch (Exception ex) {
+            return new Result(false,ex);
+        }
+    }
+    //用户列表
+    @ResponseBody
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    private Result UserList() throws Exception {
+        try {
+            Result result = new Result(true,userLoginService.userQueryAll());
             LOGGER.info("result:{}", result);
             return result;
         } catch (Exception ex) {

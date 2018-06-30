@@ -63,7 +63,7 @@ public class Shop implements Serializable {
      * This field corresponds to the database column <tt>shop.shop_number<tt>
      * </pre>
      */
-    private Integer shopNumber;
+    private Long shopNumber;
 
     /**
      * <pre>
@@ -233,7 +233,7 @@ public class Shop implements Serializable {
      *
      * @return 商店联系方式
      */
-    public Integer getShopNumber() {
+    public Long getShopNumber() {
         return shopNumber;
     }
 
@@ -244,7 +244,7 @@ public class Shop implements Serializable {
      *
      * @param shopNumber 商店联系方式
      */
-    public void setShopNumber(Integer shopNumber) {
+    public void setShopNumber(Long shopNumber) {
         this.shopNumber = shopNumber;
     }
 
