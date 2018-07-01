@@ -35,4 +35,10 @@
       AND `user_name`= #{userName,jdbcType=VARCHAR}
       AND `user_password` = #{userPassword,jdbcType=VARCHAR}
     </select>
+    <select id="userDetail" resultMap="BaseResultMap">
+        SELECT `user_name`,`user_email`,`user_number`,`id`
+        FROM `user`
+        WHERE `is_delete` = 0
+        AND `user_name` = #{userName,jdbcType=VARCHAR}
+    </select>
 </mapper>

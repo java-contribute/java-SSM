@@ -1,5 +1,6 @@
 package com.contribute.dao.manual;
 
+import com.contribute.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -22,4 +23,11 @@ public interface ExtUserMapper {
      */
     String userLoginByUserNameAndUserPassword(@Param("userName") String userName,
                                               @Param("userPassword") String userPassword);
+
+    /**
+     * 查看用户详情
+     * @param userName
+     * @return
+     */
+    User userDetail(@Param("userName") String userName);
 }

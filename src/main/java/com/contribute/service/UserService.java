@@ -10,7 +10,7 @@ import java.util.List;
  * @Date: 2018/6/19 16:44
  * 用户登录、注册服务层
  */
-public interface UserLoginRegisterService {
+public interface UserService {
     /**
      * 用户注册
      * @param user
@@ -30,4 +30,11 @@ public interface UserLoginRegisterService {
      * @return
      */
     List<User> userQueryAll();
+
+    /**
+     * 用户详情
+     * @param userName
+     * @return
+     */
+    UserLoginExecution userDetail(String userName);
 }

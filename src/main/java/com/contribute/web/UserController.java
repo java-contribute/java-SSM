@@ -2,12 +2,14 @@ package com.contribute.web;
 
 import com.contribute.dto.Result;
 import com.contribute.entity.User;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.contribute.service.UserLoginRegisterService;
+import com.contribute.service.UserService;
 
 
 /**
@@ -20,7 +22,7 @@ public class UserController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     @Autowired
-    private UserLoginRegisterService userLoginRegisterService;
+    private UserService userService;
     //用户注册
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = {
@@ -32,7 +34,7 @@ public class UserController {
         try {
             System.out.println(user);
             LOGGER.debug("username:{}",user.getUserName());
-            Result result = new Result(true, userLoginRegisterService.userRegister(user));
+            Result result = new Result(true, userService.userRegister(user));
             LOGGER.debug("result:{}", result);
             return result;
         } catch (Exception ex) {
@@ -43,9 +45,9 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = {
             "application/json; charset=utf-8" })
-    private Result UserLogin(@RequestBody User user) throws Exception {
+    private Result userLogin(@RequestBody User user) throws Exception {
         try {
-            Result result = new Result(true, userLoginRegisterService.userLogin(user));
+            Result result = new Result(true, userService.userLogin(user));
             LOGGER.info("result:{}", result);
             return result;
         } catch (Exception ex) {
@@ -55,13 +57,21 @@ public class UserController {
     //用户列表
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    private Result UserList() throws Exception {
+    private Result userList() throws Exception {
         try {
-            Result result = new Result(true, userLoginRegisterService.userQueryAll());
+            Result result = new Result(true, userService.userQueryAll());
             LOGGER.info("result:{}", result);
             return result;
         } catch (Exception ex) {
             return new Result(false,ex);
         }
+    }
+    //查看用户信息
+    @ResponseBody
+    @RequestMapping(value = "/{userName}/detail",method = RequestMethod.GET)
+    private Result userDetail(@PathVariable("userName") String userName, Model model){
+        if (StringUtils.isEmpty(userName) || userName=="")
+            return null;
+        return null;
     }
 }

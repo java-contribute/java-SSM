@@ -10,8 +10,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import test.BaseControllerTest;
 
-import com.alibaba.fastjson.JSON;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -36,6 +34,7 @@ public class UserWebTest extends BaseControllerTest {
     private MockMvc mockMvc;
     private String userList = "/user/list";
     private String userRegister = "/user/register";
+    private String userLogin = "/user/login";
 
 
     @Before
@@ -58,7 +57,6 @@ public class UserWebTest extends BaseControllerTest {
             e.printStackTrace();
         }
     }
-
     /**
      * contentType需要设置成MediaType.APPLICATION_JSON，即声明是发送“application/json”格式的数据
      * 使用content方法，将转换的json数据放到request的body中。
@@ -88,7 +86,24 @@ public class UserWebTest extends BaseControllerTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
+    }
+    @Test
+    public void userLogin(){
+        User user = new User();
+        user.setUserName("lijie");
+        user.setUserPassword("12345556");
+        String userLoginJson = JSONObject.toJSONString(user);
+        try {
+            this.mockMvc.perform(post(userLogin)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(userLoginJson))
+                    .andDo(print())
+                    .andExpect(status()
+                    .isOk())
+                    .andReturn()
+                    .getResponse().getContentAsString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

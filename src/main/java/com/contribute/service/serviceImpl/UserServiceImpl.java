@@ -7,11 +7,13 @@ import com.contribute.dao.manual.ExtUserMapper;
 import com.contribute.dto.UserLoginExecution;
 import com.contribute.entity.User;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.contribute.service.UserLoginRegisterService;
+import com.contribute.service.UserService;
 
 import java.util.Date;
 import java.util.List;
@@ -22,9 +24,9 @@ import java.util.List;
  * 用户登录、注册服务层实现
  */
 @Service
-public class UserLoginRegisterServiceImpl implements UserLoginRegisterService {
+public class UserServiceImpl implements UserService {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(UserLoginRegisterServiceImpl.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -86,8 +88,30 @@ public class UserLoginRegisterServiceImpl implements UserLoginRegisterService {
         }
     }
 
+    /**
+     * 查看全部用户
+     * @return
+     */
     @Override
     public List<User> userQueryAll() {
         return userMapper.selectAll();
     }
+
+    /**
+     * 用户详情
+     * @param userName
+     * @return
+     */
+    @Override
+    public UserLoginExecution userDetail(String userName) {
+        if (StringUtils.isEmpty(userName)||userName == " ")
+            return new UserLoginExecution(userName, LoginRegisterEnum.DETAIL_FAILED);
+        User user = new User();
+        user = extUserMapper.userDetail(userName);
+        LOGGER.debug("user:{}", user);
+        if (user != null)
+            return new UserLoginExecution(userName, LoginRegisterEnum.DETAIL_SUCCESS, user);
+        return new UserLoginExecution(userName, LoginRegisterEnum.SYSTEM_ERROR);
+    }
+
 }
