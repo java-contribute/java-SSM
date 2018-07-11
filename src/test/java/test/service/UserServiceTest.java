@@ -2,7 +2,6 @@ package test.service;
 
 import com.contribute.entity.User;
 import org.junit.Test;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.contribute.service.UserService;
 import test.BaseServiceTest;
