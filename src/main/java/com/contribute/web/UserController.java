@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.contribute.service.UserService;
 
@@ -68,11 +67,11 @@ public class UserController {
     //查看用户信息
     @ResponseBody
     @RequestMapping(value = "/{userName}/detail",method = RequestMethod.GET)
-    private Result userDetail(@PathVariable("userName") String userName){
-        if (StringUtils.isEmpty(userName) || userName == "")
-            return new Result(false,null);
-        Result result = new Result(true, userService.userDetail(userName));
-        LOGGER.info("resultDetail:{}", result);
-        return result;
+    private Result userDetail(@PathVariable("userName") String userName) {
+            if (StringUtils.isEmpty(userName) || userName == "")
+                return new Result(false, null);
+            Result result = new Result(true, userService.userDetail(userName));
+            LOGGER.info("resultDetail:{}", result);
+            return result;
     }
 }
