@@ -28,14 +28,13 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = {
             "application/json; charset=utf-8" })
     private Result UserRegister(@RequestBody User user){
-//        User user = JSON.parseObject(userString, User.class);
         System.out.println(user);
         LOGGER.debug("username:{}",user.getUserName());
         try {
             System.out.println(user);
             LOGGER.debug("username:{}",user.getUserName());
             Result result = new Result(true, userService.userRegister(user));
-            LOGGER.debug("result:{}", result);
+            LOGGER.debug("resultRegister:{}", result);
             return result;
         } catch (Exception ex) {
             return new Result(false,ex);
@@ -48,7 +47,7 @@ public class UserController {
     private Result userLogin(@RequestBody User user) throws Exception {
         try {
             Result result = new Result(true, userService.userLogin(user));
-            LOGGER.info("result:{}", result);
+            LOGGER.info("resultLogin:{}", result);
             return result;
         } catch (Exception ex) {
             return new Result(false,ex);
@@ -60,7 +59,7 @@ public class UserController {
     private Result userList() throws Exception {
         try {
             Result result = new Result(true, userService.userQueryAll());
-            LOGGER.info("result:{}", result);
+            LOGGER.info("resultList:{}", result);
             return result;
         } catch (Exception ex) {
             return new Result(false,ex);
@@ -69,9 +68,11 @@ public class UserController {
     //查看用户信息
     @ResponseBody
     @RequestMapping(value = "/{userName}/detail",method = RequestMethod.GET)
-    private Result userDetail(@PathVariable("userName") String userName, Model model){
-        if (StringUtils.isEmpty(userName) || userName=="")
-            return null;
-        return null;
+    private Result userDetail(@PathVariable("userName") String userName){
+        if (StringUtils.isEmpty(userName) || userName == "")
+            return new Result(false,null);
+        Result result = new Result(true, userService.userDetail(userName));
+        LOGGER.info("resultDetail:{}", result);
+        return result;
     }
 }
