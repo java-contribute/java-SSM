@@ -2,12 +2,17 @@ package com.contribute.service.serviceImpl;
 
 import com.contribute.entity.Address;
 import com.contribute.service.AddressService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @Author: Lijie
  * @Date: 2018/7/11 15:30
  */
 public class AddressServiceImpl implements AddressService {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+
     /**
      * 增加地址
      *

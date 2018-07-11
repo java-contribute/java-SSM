@@ -8,6 +8,7 @@ import com.contribute.entity.Shop;
  * 商家服务层
  */
 public interface ShopService {
+
     /**
      * 商户注册
      * @param shop 商户
