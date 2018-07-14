@@ -68,10 +68,10 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/{userName}/detail",method = RequestMethod.GET)
     private Result userDetail(@PathVariable("userName") String userName) {
-            if (StringUtils.isEmpty(userName) || userName == "")
-                return new Result(false, null);
-            Result result = new Result(true, userService.userDetail(userName));
-            LOGGER.info("resultDetail:{}", result);
-            return result;
+        if (StringUtils.isEmpty(userName) || userName == "")
+            return new Result(false, null);
+        Result result = new Result(true, userService.userDetail(userName));
+        LOGGER.info("resultDetail:{}", result);
+        return result;
     }
 }

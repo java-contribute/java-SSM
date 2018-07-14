@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 实现用户注册服务接口
-     * @param user
+     * @param user 用户
      * @return
      */
     @Override
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 实现用户登录服务接口
-     * @param user
+     * @param user 用户
      * @return
      */
     @Override
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 用户详情
-     * @param userName
+     * @param userName 用户名
      * @return
      */
     @Override
