@@ -36,9 +36,9 @@
 			type="com.doctorwork.mybatis.generator.plugin.DoctorWorkIsMergeablePlugin"></plugin>
 
 		<!-- 注释生成 -->
-		<commentGenerator>
+		<commentGenerator type="com.doctorwork.mybatis.generator.comment.DoctorWorkCommentGenerator">
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
-			<property name="suppressAllComments" value="true" />
+			<property name="suppressAllComments" value="false" />
 			<property name="suppressDate" value="true" />
 		</commentGenerator>
 
@@ -47,13 +47,14 @@
 			connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}" />
 
 		<!-- Java对象和数据对象的对照解析器 -->
-		<javaTypeResolver>
-			<property name="forceBigDecimals" value="true"/>
-		</javaTypeResolver>
+        <javaTypeResolver
+                type="com.doctorwork.mybatis.generator.javatype.DoctorWorkJavaTypeResolver" >
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
 
 		<!-- 生成模型的包名和位置 -->
-		<javaModelGenerator targetPackage="entity"
-			targetProject="../src/main/java/com/contribute">
+		<javaModelGenerator targetPackage="com.contribute.entity"
+			targetProject="../src/main/java">
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
@@ -63,8 +64,8 @@
 
         <!-- 生成DAO的包名和位置 -->
         <javaClientGenerator
-                targetPackage="dao"
-                targetProject="../src/main/java/com/contribute" type="XMLMAPPER">
+                targetPackage="com.contribute.dao"
+                targetProject="../src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
