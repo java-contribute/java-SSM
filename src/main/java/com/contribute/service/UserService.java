@@ -2,6 +2,7 @@ package com.contribute.service;
 
 import com.contribute.dto.UserLoginExecution;
 import com.contribute.entity.User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public interface UserService {
      * @param user
      * @return
      */
+    @Transactional
     UserLoginExecution userRegister(User user);
 
     /**
