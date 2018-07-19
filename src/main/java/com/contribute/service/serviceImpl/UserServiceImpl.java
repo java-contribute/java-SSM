@@ -7,10 +7,8 @@ import com.contribute.dao.manual.ExtUserMapper;
 import com.contribute.dto.UserLoginExecution;
 import com.contribute.entity.User;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.contribute.service.UserService;
@@ -104,10 +102,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserLoginExecution userDetail(String userName) {
-        if (StringUtils.isEmpty(userName)||userName == " ")
+        if (userName.isEmpty())
             return new UserLoginExecution(userName, LoginRegisterEnum.DETAIL_FAILED);
-        User user = new User();
-        user = extUserMapper.userDetail(userName);
+        User user = extUserMapper.userDetail(userName);
         LOGGER.debug("user:{}", user);
         if (user != null)
             return new UserLoginExecution(userName, LoginRegisterEnum.DETAIL_SUCCESS, user);

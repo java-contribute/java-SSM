@@ -2,7 +2,6 @@ package com.contribute.web;
 
 import com.contribute.dto.Result;
 import com.contribute.entity.User;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +67,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/{userName}/detail",method = RequestMethod.GET)
     private Result userDetail(@PathVariable("userName") String userName) {
-        if (StringUtils.isEmpty(userName) || userName == "")
+        if (userName.isEmpty() || userName == "")
             return new Result(false, null);
         Result result = new Result(true, userService.userDetail(userName));
         LOGGER.info("resultDetail:{}", result);
