@@ -4,11 +4,13 @@ import com.contribute.entity.Address;
 import com.contribute.service.AddressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * @Author: Lijie
  * @Date: 2018/7/11 15:30
  */
+@Service
 public class AddressServiceImpl implements AddressService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
