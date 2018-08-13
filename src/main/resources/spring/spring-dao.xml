@@ -30,10 +30,10 @@
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
-        <property name="url" value="${jdbc_url}" />
-        <property name="username" value="${jdbc_user}" />
-        <property name="password" value="${jdbc_password}" />
-
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="5" />
         <property name="minIdle" value="5" />
@@ -66,7 +66,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 注入数据库连接池 -->
         <property name="dataSource" ref="dataSource" />
-        <!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
+        <!-- 配置MyBatis全局配置文件:mybatis-config.xml -->
         <property name="configLocation" value="classpath:mybatis-config.xml" />
         <!-- 扫描entity包 使用别名 -->
         <property name="typeAliasesPackage" value="com.contribute.entity" />
