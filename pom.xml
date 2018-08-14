@@ -8,7 +8,7 @@
     <artifactId>java-SSM</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Lijie test</name>
+    <name>Lijie test1</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
