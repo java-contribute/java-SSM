@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     public UserLoginExecution userRegister(User user){
         try {
             String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
-            if(salt != null && salt != " ")
+            if(salt != null && !salt.equals(""))
                 return new UserLoginExecution(user.getUserName(), LoginRegisterEnum.REGISTER_ECHO);
             //加密盐
             user.setUserSalt(DigestUtils.md5Hex(user.getUserName() + new Date().getTime()));
@@ -69,18 +69,17 @@ public class UserServiceImpl implements UserService {
         try{
             String salt = extUserMapper.selectUserSaltByUserNameAndCheckUserName(user.getUserName());
             LOGGER.info("Salt:{}", salt);
-            if(salt == null || salt == " ")
+            if(salt == null || salt.equals(""))
                 return new UserLoginExecution(user.getUserName(), LoginRegisterEnum.LOGIN_FAILED);
             user.setUserPassword(DigestUtils.sha1Hex(user.getUserPassword() + salt));
             String login = extUserMapper.userLoginByUserNameAndUserPassword(user.getUserName(), user.getUserPassword());
             LOGGER.info("login:{}", login);
-            if(login != null && login != " ")
+            if(login != null && !login.equals(""))
                 return new UserLoginExecution(user.getUserName(), LoginRegisterEnum.LOGIN_SUCCESS, user);
             return new UserLoginExecution(user.getUserName(), LoginRegisterEnum.LOGIN_FAILED);
         }catch (UserLoginException uex){
             throw uex;
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
             throw new UserLoginException("登录失败:"+ex.getMessage());
         }

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.contribute.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 /**
  * @Author: Lijie
@@ -23,8 +26,7 @@ public class UserController {
     private UserService userService;
     //用户注册
     @ResponseBody
-    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = {
-            "application/json; charset=utf-8" })
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
     private Result UserRegister(@RequestBody User user){
         System.out.println(user);
         LOGGER.debug("username:{}",user.getUserName());
@@ -40,11 +42,18 @@ public class UserController {
     }
     //用户登录
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = {
-            "application/json; charset=utf-8" })
-    private Result userLogin(@RequestBody User user) throws Exception {
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
+    private Result userLogin(@RequestBody User user, HttpServletRequest req, HttpSession session) throws Exception {
         try {
+            //获取session
+            if (req.getSession().getAttribute("user") !=null){
+                LOGGER.info("session:{}",user);
+                return new Result(true, userService.userLogin(user));
+            }
             Result result = new Result(true, userService.userLogin(user));
+            //session 存入redis
+            req.getSession().setAttribute("user", user);
+            LOGGER.info("session:{}",user);
             LOGGER.info("resultLogin:{}", result);
             return result;
         } catch (Exception ex) {
