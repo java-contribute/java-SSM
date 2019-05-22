@@ -30,4 +30,11 @@ public interface ExtUserMapper {
      * @return
      */
     User userDetail(@Param("userName") String userName);
+
+    /**
+     * 删除用户
+     * @param userName
+     * @return
+     */
+    int userDelete(@Param("userName") String userName);
 }

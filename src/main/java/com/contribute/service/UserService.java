@@ -39,4 +39,7 @@ public interface UserService {
      * @return
      */
     UserLoginExecution userDetail(String userName);
+
+
+    boolean userDelete(String userName);
 }

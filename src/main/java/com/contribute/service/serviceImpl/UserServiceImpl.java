@@ -110,4 +110,12 @@ public class UserServiceImpl implements UserService {
         return new UserLoginExecution(userName, LoginRegisterEnum.SYSTEM_ERROR);
     }
 
+    @Override
+    public boolean userDelete(String userName) {
+        if (extUserMapper.userDelete(userName) == 1){
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -41,25 +41,25 @@ public class UserController {
         }
     }
     //用户登录
-    @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
-    private Result userLogin(@RequestBody User user, HttpServletRequest req, HttpSession session) throws Exception {
-        try {
+//    @ResponseBody
+//    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
+//    private Result userLogin(@RequestBody User user, HttpServletRequest req, HttpSession session) throws Exception {
+//        try {
             //获取session
-            if (req.getSession().getAttribute("user") !=null){
-                LOGGER.info("session:{}",user);
-                return new Result(true, userService.userLogin(user));
-            }
-            Result result = new Result(true, userService.userLogin(user));
+//            if (req.getSession().getAttribute("user") != null){
+//                LOGGER.info("session:{}",user);
+//                return new Result(true, userService.userLogin(user));
+//            }
+//            Result result = new Result(true, userService.userLogin(user));
             //session 存入redis
-            req.getSession().setAttribute("user", user);
-            LOGGER.info("session:{}",user);
-            LOGGER.info("resultLogin:{}", result);
-            return result;
-        } catch (Exception ex) {
-            return new Result(false,ex);
-        }
-    }
+//            req.getSession().setAttribute("user", user);
+//            LOGGER.info("session:{}",user);
+//            LOGGER.info("resultLogin:{}", result);
+//            return result;
+//        } catch (Exception ex) {
+//            return new Result(false,ex);
+//        }
+//    }
     //用户列表
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -72,9 +72,10 @@ public class UserController {
             return new Result(false,ex);
         }
     }
+
     //查看用户信息
     @ResponseBody
-    @RequestMapping(value = "/{userName}/detail",method = RequestMethod.GET)
+    @RequestMapping(value = "/{userName}/detail", method = RequestMethod.GET)
     private Result userDetail(@PathVariable("userName") String userName) {
         if (userName.isEmpty() || userName == "")
             return new Result(false, null);
@@ -82,4 +83,15 @@ public class UserController {
         LOGGER.info("resultDetail:{}", result);
         return result;
     }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/del")
+    private Result userDelete(@RequestParam(value = "userName") String userName){
+        if (userService.userDelete(userName)){
+            return new Result(true);
+        }
+        return new Result(false, "删除失败");
+    }
+
 }

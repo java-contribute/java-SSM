@@ -1,0 +1,21 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+       <!--xmlns:util="http://www.springframework.org/schema/util"-->
+       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+       <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
+        <!--http://www.springframework.org/schema/beans/spring-beans.xsd-->
+        <!--http://www.springframework.org/schema/util-->
+        <!--http://www.springframework.org/schema/util/spring-util.xsd">-->
+
+    <!--<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>-->
+    <!--<bean class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">-->
+        <!--<property name="hostName" value="192.128.204.128" />-->
+        <!--<property name="password" value="" />-->
+        <!--<property name="port" value="6379" />-->
+        <!--<property name="database" value="10" />-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 阿里云和腾讯云的redis服务器需要配置  让Spring Session不再执行config命令 &ndash;&gt;-->
+    <!--<util:constant static-field="org.springframework.session.data.redis.config.ConfigureRedisAction.NO_OP"/>-->
+
+<!--</beans>-->
